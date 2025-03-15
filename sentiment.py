@@ -92,6 +92,7 @@ for row in read_cursor:
     text_to_analyse = str(title) + " " + str(text)
     cleaned_text = clean_text(text_to_analyse)
 
+    # calculating sentiment for cleaned review
     sentiment = sia.polarity_scores(cleaned_text)
     blob = TextBlob(cleaned_text)
     polarity, subjective = blob.sentiment
