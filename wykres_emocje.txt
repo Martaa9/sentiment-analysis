@@ -1,0 +1,10 @@
+SELECT
+    SUM(review_emotions.fear) as fear,
+    SUM(review_emotions.anger) as anger,
+    SUM(review_emotions.anticipation) as anticipation,
+    SUM(review_emotions.trust) as trust,
+    SUM(review_emotions.surprise) as surprise,
+    SUM(review_emotions.sadness) as sadness,
+    SUM(review_emotions.disgust) as disgust,
+    SUM(review_emotions.joy) as joy
+FROM review_emotions

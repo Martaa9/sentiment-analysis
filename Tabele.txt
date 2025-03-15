@@ -1,0 +1,66 @@
+#Tabela 3.1. Podział recenzji według sentymentu
+
+WITH total_reviews AS (
+    SELECT COUNT(*) AS total_count
+    FROM review_sentiment
+)
+SELECT
+    CASE
+        WHEN compound_sentiment > 0 AND compound_sentiment <= 1 THEN 'Pozytywny sentyment'
+        WHEN compound_sentiment < 0 AND compound_sentiment >= -1 THEN 'Negatywny sentyment'
+        WHEN compound_sentiment = 0 THEN 'Neutralny sentyment'
+    END AS sentiment_type,
+    COUNT(*) AS sentiment_count,
+    ROUND((COUNT(*) * 100.0 / (SELECT total_count FROM total_reviews)), 2) AS sentiment_percentage
+FROM review_sentiment
+GROUP BY sentiment_type;
+
+#Tabela 3.65. Podział recenzji według oceny gwiazdkowej
+
+WITH total_reviews AS (
+    SELECT COUNT() AS total_count
+    FROM review_sentiment
+)
+
+SELECT
+    CASE
+        WHEN rating > 3 AND rating <= 5 THEN 'Pozytywna recenzja'
+        WHEN rating < 3 AND rating >= 1 THEN 'Negatywna recenzja'
+        WHEN rating = 3 THEN 'Neutralna recenzja'
+    END AS rating_type,
+    COUNT() AS rating_count,
+    ROUND((COUNT() * 100.0 / (SELECT total_count FROM total_reviews)), 2) AS rating_percentage
+FROM review_sentiment
+GROUP BY rating_type;
+
+#Tabela 3.6. Tabela kontyngencji 
+
+WITH ReviewCounts AS (
+    SELECT
+        COUNT(*) AS total_reviews,
+        SUM(CASE WHEN rs.rating BETWEEN 4 AND 5 AND rs.compound_sentiment > 0 AND rs.compound_sentiment <= 1 THEN 1 ELSE 0 END) AS positive_positive_reviews,
+        SUM(CASE WHEN rs.rating BETWEEN 4 AND 5 AND rs.compound_sentiment = 0 THEN 1 ELSE 0 END) AS positive_neutral_reviews,
+        SUM(CASE WHEN rs.rating BETWEEN 4 AND 5 AND rs.compound_sentiment < 0 THEN 1 ELSE 0 END) AS positive_negative_reviews,
+        SUM(CASE WHEN rs.rating = 3 AND rs.compound_sentiment > 0 AND rs.compound_sentiment <= 1 THEN 1 ELSE 0 END) AS neutral_positive_reviews,
+        SUM(CASE WHEN rs.rating = 3 AND rs.compound_sentiment = 0 THEN 1 ELSE 0 END) AS neutral_neutral_reviews,
+        SUM(CASE WHEN rs.rating = 3 AND rs.compound_sentiment < 0 THEN 1 ELSE 0 END) AS neutral_negative_reviews,
+        SUM(CASE WHEN rs.rating BETWEEN 1 AND 2 AND rs.compound_sentiment > 0 AND rs.compound_sentiment <= 1 THEN 1 ELSE 0 END) AS negative_positive_reviews,
+        SUM(CASE WHEN rs.rating BETWEEN 1 AND 2 AND rs.compound_sentiment = 0 THEN 1 ELSE 0 END) AS negative_neutral_reviews,
+        SUM(CASE WHEN rs.rating BETWEEN 1 AND 2 AND rs.compound_sentiment < 0 THEN 1 ELSE 0 END) AS negative_negative_reviews
+    FROM
+        review_sentiment rs
+
+)
+SELECT
+    (positive_positive_reviews * 100.0 / total_reviews) AS positive_percentage,
+    (positive_neutral_reviews * 100.0 / total_reviews) AS positive_neutral_reviews,
+    (positive_negative_reviews * 100.0 / total_reviews) AS positive_negative_reviews,
+    (neutral_positive_reviews * 100.0 / total_reviews) AS neutral_positive_reviews,
+    (neutral_neutral_reviews * 100.0 / total_reviews) AS neutral_percentage,
+    (neutral_negative_reviews * 100.0 / total_reviews) AS neutral_negative_reviews,
+    (negative_positive_reviews * 100.0 / total_reviews) AS negative_positive_reviews,
+    (negative_neutral_reviews * 100.0 / total_reviews) AS negative_neutral_reviews ,
+    (negative_negative_reviews * 100.0 / total_reviews) AS negative_percentage
+    
+FROM
+    ReviewCounts;
