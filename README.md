@@ -1,1 +1,11 @@
-# sentiment-analysis
+# Temat projektu
+
+Recenzje produktów są istotnym źródłem informacji zarówno dla konsumentów, jak i firm. Na platformach e-commerce, takich jak Amazon, odgrywają one istotną rolę w procesie podejmowania decyzji zakupowych. Konsumenci, bazując na doświadczeniach innych użytkowników, mogą lepiej ocenić jakość produktów, przewidzieć potencjalne problemy czy upewnić się co do swojego wyboru. W związku z rosnącym znaczeniem opinii, analiza sentymentu – czyli automatyczne przetwarzanie treści recenzji w celu oceny ich emocjonalnego wydźwięku – staje się nieodzownym narzędziem. Dzięki niej możliwe jest szybkie zrozumienie nastrojów klientów oraz zebranie istotnych informacji, które mogą być wykorzystane przez firmy do poprawy jakości oferowanych produktów i optymalizacji strategii sprzedażowych. Amazon, jako jeden z największych na świecie sklepów internetowych, oferuje użytkownikom możliwość wyrażenia opinii nie tylko w formie tekstowej, ale także za pomocą liczbowej oceny gwiazdkowej. Oceny te pozwalają na szybkie zobrazowanie poziomu satysfakcji z zakupu, podczas gdy tekstowa część recenzji często zawiera szczegółowe uwagi dotyczące produktu. W takim układzie pojawia się pytanie o zgodność między ocenami liczbowymi a wydźwiękiem samej treści opinii – czy wysoka ocena gwiazdkowa zawsze idzie w parze z pozytywnym sentymentem? Czy niska ocena gwiazdkowa rzeczywiście odzwierciedla negatywne odczucia klienta?
+
+# Cel projektu
+
+Celem projektu jest zbadanie zgodności między analizą sentymentu a ocenami gwiazdkowymi w recenzjach produktów AGD, opublikowanych przez klientów na platformie Amazon. Projekt ma na celu identyfikację potencjalnych rozbieżności w klasyfikacji sentymentu i ocenach liczbowych oraz zrozumienie, w jaki sposób specyfika treści opinii (np. ich długość, emocjonalny wydźwięk, obecność retrospekcji) wpływa na wyniki analizy sentymentu. Dodatkowym celem jest określenie, jakie emocje są najczęściej wyrażane w recenzjach dotyczących produktów AGD. Analiza ta dostarczy cennych informacji na temat złożoności ludzkich opinii oraz efektywności automatycznych narzędzi do klasyfikacji sentymentu, co może pomóc w lepszym zrozumieniu potrzeb i oczekiwań klientów. Dodatkowo wyniki projektu mogą posłużyć jako wskazówki dla sprzedawców, aby lepiej interpretować recenzje produktów oraz udoskonalić proces obsługi klienta i zarządzania jakością produktów.
+
+# Dane wejściowe
+
+W projekcie wykorzystano zbiór danych Amazon Reviews 2023 (Appliances).
